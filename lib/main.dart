@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:test_tacks/models/profile_data_model.dart';
 import 'package:test_tacks/ui/tabs_page.dart';
-
-import 'file:///C:/flutter/projects/test_tacks/lib/models/profile_data_model.dart';
 
 void main() => runApp(TestTasks());
 

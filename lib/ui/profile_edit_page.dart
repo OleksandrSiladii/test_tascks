@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
-import 'file:///C:/flutter/projects/test_tacks/lib/models/profile_data_model.dart';
+import 'package:test_tacks/models/profile_data_model.dart';
 
 class ProfileEditPage extends StatefulWidget {
   @override
@@ -41,63 +40,65 @@ class ProfileEditPageState extends State<ProfileEditPage> {
       appBar: AppBar(title: Text("Profile Form")),
       body: Container(
         margin: EdgeInsets.all(24),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _buildInput(
-                'First Name',
-                _firstNameController,
-                InputType.text,
-              ),
-              _buildInput(
-                'Last Name',
-                _lastNameController,
-                InputType.text,
-              ),
-              _buildInput(
-                'Phone Number',
-                _phoneNumberController,
-                InputType.phone,
-              ),
-              _buildInput(
-                'Date Of Birth',
-                _dateOfBirthController,
-                InputType.date,
-              ),
-              Builder(
-                builder: (ctx) => RaisedButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  color: Theme.of(context).colorScheme.primary,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'SEND',
-                        style: TextStyle(color: Colors.white, fontSize: 25),
-                      ),
-                      SizedBox(
-                        width: 20.0,
-                      ),
-                      Icon(
-                        Icons.send,
-                        color: Colors.white,
-                        size: 30.0,
-                      ),
-                    ],
-                  ),
-                  onPressed: () {
-                    if (!_formKey.currentState.validate()) {
-                      return;
-                    }
-                    _showConfirmationDialog(_formKey, ctx);
-                  },
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                _buildInput(
+                  'First Name',
+                  _firstNameController,
+                  InputType.text,
                 ),
-              )
-            ],
+                _buildInput(
+                  'Last Name',
+                  _lastNameController,
+                  InputType.text,
+                ),
+                _buildInput(
+                  'Phone Number',
+                  _phoneNumberController,
+                  InputType.phone,
+                ),
+                _buildInput(
+                  'Date Of Birth',
+                  _dateOfBirthController,
+                  InputType.date,
+                ),
+                Builder(
+                  builder: (ctx) => RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    color: Theme.of(context).colorScheme.primary,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'SEND',
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        ),
+                        SizedBox(
+                          width: 20.0,
+                        ),
+                        Icon(
+                          Icons.send,
+                          color: Colors.white,
+                          size: 30.0,
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      if (!_formKey.currentState.validate()) {
+                        return;
+                      }
+                      _showConfirmationDialog(_formKey, ctx);
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -112,6 +113,7 @@ class ProfileEditPageState extends State<ProfileEditPage> {
         controller: controller,
         decoration: _configureInputDecorator(title),
         // maxLength: 20,
+        keyboardType: type == InputType.phone ? TextInputType.number : null,
         validator: (String value) {
           if (value.isEmpty) {
             return '$title is Required';
